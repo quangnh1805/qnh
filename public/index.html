@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập</title>
+</head>
+<body>
+    <h2>Trang Đăng Nhập</h2>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Tên đăng nhập" required><br><br>
+        <input type="password" id="password" placeholder="Mật khẩu" required><br><br>
+        <button type="submit">Đăng nhập</button>
+    </form>
+
+    <script>
+        document.getElementById('loginForm').onsubmit = async (e) => {
+            e.preventDefault(); // Ngăn trang web tải lại
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Gửi dữ liệu đến Backend API
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // Nếu thành công, chuyển hướng sang trang chủ
+                window.location.href = result.redirect;
+            } else {
+                // Nếu lỗi, hiển thị thông báo
+                alert(result.message);
+            }
+        };
+    </script>
+</body>
+</html>
