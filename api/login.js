@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   // Chỉ chấp nhận yêu cầu POST (gửi dữ liệu lên)
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Chỉ chấp nhận phương thức POST' });
