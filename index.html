@@ -74,5 +74,27 @@
             </div>
         </div>
     </footer>
+
+<script>
+    const handleLogin = async (username, password) => {
+  try {
+    // Gửi yêu cầu POST đến Server Node.js
+    const response = await fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json' // Rất quan trọng!
+      },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json();
+    console.log('Phản hồi từ Server:', data);
+  } catch (error) {
+    console.error('Lỗi kết nối:', error);
+  }
+};
+</script>
+    
 </body>
+
 </html>
