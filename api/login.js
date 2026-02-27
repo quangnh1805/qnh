@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // Chỉ chấp nhận yêu cầu POST (gửi dữ liệu lên)
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Chỉ chấp nhận phương thức POST' });
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
     const users = database.collection('users'); // <--- Tên Table của bạn
 
     // Tìm xem có user nào khớp cả username và password không
-    const user = await users.findOne({ admin, 060921sam });
+    const user = await users.findOne({ username, password });
 
     if (user) {
       // Đăng nhập đúng, bảo trình duyệt chuyển hướng sang trang chủ
